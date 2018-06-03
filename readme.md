@@ -12,5 +12,5 @@
     - ```Tymon\JWTAuth\Providers\LaravelServiceProvider::class,``` (providers)
     - ```'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,```
     - ```'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class``` (both aliases)
-    - ```php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"```
-    - ```php artisan jwt:secret```
+- Run ```php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"``` to generate ```jwt.php```.
+- Run ```php artisan jwt:secret``` to generate key in ```.env``` file.
