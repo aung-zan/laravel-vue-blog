@@ -22,5 +22,4 @@ Route::prefix('auth')->group(function() {
     Route::post     ('login',       'AuthController@login');
     Route::get      ('profile',     'AuthController@profile');
     Route::post     ('update',      'AuthController@update');
-    Route::post     ('logout',      'AuthController@logout');
 });
