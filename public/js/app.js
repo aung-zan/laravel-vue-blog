@@ -51656,6 +51656,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -51666,7 +51670,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             username: '',
             password: '',
             error: null,
-            message: ''
+            messages: []
         };
     },
 
@@ -51685,12 +51689,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
 
                 _this.error = false;
-                _this.message = response.data;
-            }).catch(function (response) {
+                _this.messages = response.data;
+            }).catch(function (error) {
 
+                console.log(error.response.data);
                 _this.error = true;
-                _this.message = response.data;
-                console.log(response.data);
+                _this.messages = error.response.data;
             });
         }
     }
@@ -51721,20 +51725,25 @@ var render = function() {
                   { staticClass: "alert alert-success alert-dismissible" },
                   [
                     _c(
-                      "a",
+                      "button",
                       {
                         staticClass: "close",
-                        attrs: {
-                          href: "#",
-                          "data-dismiss": "alert",
-                          "aria-label": "close"
+                        attrs: { "aria-label": "close" },
+                        on: {
+                          click: function($event) {
+                            _vm.error = null
+                          }
                         }
                       },
                       [_vm._v("×")]
                     ),
                     _vm._v(" "),
-                    _c("strong", [_vm._v("Success !")]),
-                    _vm._v(" " + _vm._s(_vm.message) + "\n                    ")
+                    _c(
+                      "ul",
+                      _vm._l(_vm.messages, function(message) {
+                        return _c("li", [_vm._v(_vm._s(message))])
+                      })
+                    )
                   ]
                 )
               : _vm._e(),
@@ -51745,20 +51754,25 @@ var render = function() {
                   { staticClass: "alert alert-danger alert-dismissible" },
                   [
                     _c(
-                      "a",
+                      "button",
                       {
                         staticClass: "close",
-                        attrs: {
-                          href: "#",
-                          "data-dismiss": "alert",
-                          "aria-label": "close"
+                        attrs: { "aria-label": "close" },
+                        on: {
+                          click: function($event) {
+                            _vm.error = null
+                          }
                         }
                       },
                       [_vm._v("×")]
                     ),
                     _vm._v(" "),
-                    _c("strong", [_vm._v("Error !")]),
-                    _vm._v(" " + _vm._s(_vm.message) + "\n                    ")
+                    _c(
+                      "ul",
+                      _vm._l(_vm.messages, function(message) {
+                        return _c("li", [_vm._v(_vm._s(message))])
+                      })
+                    )
                   ]
                 )
               : _vm._e(),
