@@ -11,13 +11,17 @@
                     <div class="card-body">
 
                         <div class="alert alert-success alert-dismissible" v-if="error === false">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <strong>Success !</strong> {{ message }}
+                            <button class="close" aria-label="close" v-on:click= "error = null">&times;</button>
+                            <ul>
+                                <li v-for="message in messages">{{ message }}</li>
+                            </ul>
                         </div>
 
                         <div class="alert alert-danger alert-dismissible" v-if="error === true">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <strong>Error !</strong> {{ message }}
+                            <button class="close" aria-label="close" v-on:click= "error = null">&times;</button>
+                            <ul>
+                                <li v-for="message in messages">{{ message }}</li>
+                            </ul>
                         </div>
 
                         <form v-on:submit.prevent="submitRegister">
@@ -88,7 +92,7 @@
                 username            : '',
                 password            : '',
                 error               : null,
-                message             : '',
+                messages            : [],
             }
         },
         methods: {
@@ -104,13 +108,13 @@
                 }).then(response => {
 
                     this.error = false;
-                    this.message = response.data;
+                    this.messages = response.data;
 
-                }).catch(response => {
+                }).catch(error => {
 
+                    console.log(error.response.data);
                     this.error = true;
-                    this.message = response.data;
-                    console.log(response.data);
+                    this.messages = error.response.data;
 
                 });
             }

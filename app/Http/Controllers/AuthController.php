@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth, Log, App\User, JWTAuth;
+use Auth, Log, App\User, JWTAuth, Validator;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -27,8 +28,17 @@ class AuthController extends Controller
     {
         $credentials = request()->input();
 
+        $validation = Validator::make($credentials, [
+            'email'     => 'required|email',
+            'password'  => 'required|min:6',
+        ]);
+
+        if ($validation->fails()) {
+            return response()->json($validation->getMessageBag(), 422);
+        }
+
         User::create($credentials);
-        return response()->json('Successfully Saved!', 200);
+        return response()->json(['message' => 'Successfully Saved!'], 200);
     }
 
     /**
